@@ -1,7 +1,12 @@
+using System;
+using System.Reflection;
+using desafio_impulso_dotnet.Repositories;
+using desafio_impulso_dotnet.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +25,17 @@ namespace desafio_impulso_dotnet
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connection = Configuration["ConnectionStrings:DefaultConnection"];
+            services.AddDbContext<DataBaseContext>(options =>
+                options.UseSqlite(connection, options =>
+                {
+                    options.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+                })
+            );
+            
+            services.AddScoped<ISchoolService, SchoolService>();
+            services.AddScoped<ISchoolRepository, SchoolRepository>();
+            
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
@@ -37,6 +53,12 @@ namespace desafio_impulso_dotnet
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+            }
+            
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var context = serviceScope.ServiceProvider.GetRequiredService<DataBaseContext>();
+                context.Database.EnsureCreated();
             }
 
             app.UseHttpsRedirection();
@@ -62,10 +84,8 @@ namespace desafio_impulso_dotnet
 
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
+              
+                spa.UseAngularCliServer(npmScript: "start");
             });
         }
     }
