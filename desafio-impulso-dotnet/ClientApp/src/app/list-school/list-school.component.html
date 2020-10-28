@@ -2,7 +2,10 @@
 
 <p *ngIf="schools"><em>Para acessar as turmas da escola clique em alguma das escolas.</em></p>
 
-<p *ngIf="!schools"><em>Carregando...</em></p>
+<div *ngIf="!schools" style="text-align: center;">
+  <img src="assets/impulso-loading.gif" class="navbar-toggler-icon" />
+  <p ><em>Carregando...</em></p>
+</div>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="schools">
   <thead>

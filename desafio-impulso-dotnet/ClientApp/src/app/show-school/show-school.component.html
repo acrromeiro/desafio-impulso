@@ -1,6 +1,9 @@
 <h1 id="tableLabel">Turmas</h1>
 
-<p *ngIf="!schoolClasses"><em>Carregando...</em></p>
+<div *ngIf="!schoolClasses" style="text-align: center;">
+  <img src="assets/impulso-loading.gif" class="navbar-toggler-icon" />
+  <p ><em>Carregando...</em></p>
+</div>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="schoolClasses">
   <thead>
