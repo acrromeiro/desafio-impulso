@@ -1,21 +1,27 @@
 <h1 id="tableLabel">Turmas</h1>
 
-<p *ngIf="!schoolClasses"><em>Loading...</em></p>
+<p *ngIf="!schoolClasses"><em>Carregando...</em></p>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="schoolClasses">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Nome</th>
+      <th>Série</th>
+      <th>Quantidade de Alunos</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let schoolClass of schoolClasses">
+      <td>{{ schoolClass.id }}</td>
       <td>{{ schoolClass.name }}</td>
+      <td>{{ schoolClass.grade }}</td>
+      <td>{{ schoolClass.qtdStudents }}</td>
     </tr>
   </tbody>
 </table>
 
-<button class="btn btn-outline-success" *ngIf="schoolClasses" [routerLink]="['/create-school']" >Cadastrar Escola</button>
+<button class="btn btn-outline-success" *ngIf="schoolClasses" [routerLink]="['/create-school-class',schoolId]" >Cadastrar Turma</button>
 
 <br/>
 <br/>

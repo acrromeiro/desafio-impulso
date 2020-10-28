@@ -1,6 +1,8 @@
 <h1 id="tableLabel">Escolas</h1>
 
-<p *ngIf="!schools"><em>Loading...</em></p>
+<p *ngIf="schools"><em>Para acessar as turmas da escola clique em alguma das escolas.</em></p>
+
+<p *ngIf="!schools"><em>Carregando...</em></p>
 
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="schools">
   <thead>
@@ -10,7 +12,7 @@
     </tr>
   </thead>
   <tbody>
-      <tr *ngFor="let school of schools" [routerLink]="['/show-school']">
+      <tr *ngFor="let school of schools" [routerLink]="['/show-school',school.id]">
         <td>{{ school.id }}</td>
         <td>{{ school.name }}</td>
       </tr>

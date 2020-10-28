@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CreateSchoolComponent } from './create-school/create-school.component';
+import { CreateSchoolClassComponent } from './create-school-class/create-school-class.component';
 import { ListSchoolComponent } from './list-school/list-school.component';
 import { ShowSchoolComponent } from './show-school/show-school.component';
 
@@ -18,6 +19,7 @@ import { ShowSchoolComponent } from './show-school/show-school.component';
     NavMenuComponent,
     HomeComponent,
     CreateSchoolComponent,
+    CreateSchoolClassComponent,
     ListSchoolComponent,
     ShowSchoolComponent
   ],
@@ -30,7 +32,8 @@ import { ShowSchoolComponent } from './show-school/show-school.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'create-school', component: CreateSchoolComponent },
       { path: 'list-school', component: ListSchoolComponent },
-      { path: 'show-school', component: ShowSchoolComponent },
+      { path: 'show-school/:id', component: ShowSchoolComponent },
+      { path: 'create-school-class/:id', component: CreateSchoolClassComponent },
     ])
   ],
   providers: [],

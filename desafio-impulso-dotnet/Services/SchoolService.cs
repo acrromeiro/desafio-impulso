@@ -1,11 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using desafio_impulso_dotnet.Models;
 using desafio_impulso_dotnet.Repositories;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
 
 namespace desafio_impulso_dotnet.Services
 {
@@ -24,17 +21,27 @@ namespace desafio_impulso_dotnet.Services
         {
             School school = new School();
             school.Name = Name;
-            return await this._schoolRepository.AddAsync(school);
+            return await _schoolRepository.AddAsync(school);
         }
         
         public IQueryable<School> GetAll()
         {
-            return  this._schoolRepository.GetAll();
+            return  _schoolRepository.GetAll();
         }
         
         public IQueryable<SchoolClass> GetAllSchoolClass(string id)
         {
-           return this._schoolClassRepository.GetAllBySchoolId(Int32.Parse(id));
+           return _schoolClassRepository.GetAllBySchoolId(Int32.Parse(id));
+        }
+        
+        public async Task<SchoolClass> CreateSchoolClassInSchool(string Name,string Grade,string QtdStudents,string SchoolId)
+        {
+            SchoolClass schoolClass = new SchoolClass();
+            schoolClass.Name = Name;
+            schoolClass.Grade = Grade;
+            schoolClass.QtdStudents = Int32.Parse(QtdStudents);
+            schoolClass.SchoolId = Int32.Parse(SchoolId);
+            return await _schoolClassRepository.AddAsync(schoolClass);
         }
     }
 }

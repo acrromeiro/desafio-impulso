@@ -19,6 +19,6 @@ export class CreateSchoolComponent {
         this.notifier.notify("sucess","Cadastro de escola feito com sucesso!");
         this.router.navigate(['/list-school']).then(r => {});
       }
-    }, error => {this.notifier.notify("error","Falaha ao cadastrar escola!!"); console.error(error);});
+    }, error => {this.notifier.notify("error","Falha ao cadastrar escola!!"); console.error(error);});
   }
 }
