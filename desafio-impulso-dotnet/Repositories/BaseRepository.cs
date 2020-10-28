@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace desafio_impulso_dotnet.Repositories
 {
-    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : class, new()
+    public class BaseRepository<TEntity> : IRepository<TEntity> where TEntity : BaseModel, new()
     {
         protected readonly DataBaseContext DataBaseContext;
 
@@ -25,7 +25,19 @@ namespace desafio_impulso_dotnet.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"Couldn't retrieve entities: {ex.Message}");
+                throw new Exception($"Não foi possivel retornar a entidades: {ex.Message}");
+            }
+        }
+        
+        public Task<TEntity> GetById(int id)
+        {
+            try
+            {
+                return DataBaseContext.Set<TEntity>().FirstOrDefaultAsync(c => c.Id == id);;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Não foi possivel retornar a entidade: {ex.Message}");
             }
         }
 
@@ -33,7 +45,7 @@ namespace desafio_impulso_dotnet.Repositories
         {
             if (entity == null)
             {
-                throw new ArgumentNullException($"{nameof(AddAsync)} entity must not be null");
+                throw new ArgumentNullException($"{nameof(AddAsync)} a entidade não pode ser nula");
             }
 
             try
@@ -45,7 +57,7 @@ namespace desafio_impulso_dotnet.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"{nameof(entity)} could not be saved: {ex.Message}");
+                throw new Exception($"{nameof(entity)} falha ao tentar salvar: {ex.Message}");
             }
         }
 
@@ -53,7 +65,7 @@ namespace desafio_impulso_dotnet.Repositories
         {
             if (entity == null)
             {
-                throw new ArgumentNullException($"{nameof(AddAsync)} entity must not be null");
+                throw new ArgumentNullException($"{nameof(AddAsync)} a entidade não pode ser nula");
             }
 
             try
@@ -65,7 +77,7 @@ namespace desafio_impulso_dotnet.Repositories
             }
             catch (Exception ex)
             {
-                throw new Exception($"{nameof(entity)} could not be updated: {ex.Message}");
+                throw new Exception($"{nameof(entity)}  falha ao tentar salvar: {ex.Message}");
             }
         }
     }

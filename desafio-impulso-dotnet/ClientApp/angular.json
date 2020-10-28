@@ -23,8 +23,7 @@
             "assets": ["src/assets"],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.css",
-              "node_modules/angular-notifier/styles/themes/theme-material.css"
+              "src/styles.css"
             ],
             "scripts": []
           },

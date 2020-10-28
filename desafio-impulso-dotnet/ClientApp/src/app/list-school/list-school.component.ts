@@ -16,5 +16,6 @@ export class ListSchoolComponent {
 }
 
 interface School {
+  id: number
   name: string;
 }

@@ -31,7 +31,7 @@ namespace desafio_impulso_dotnet.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public int Post(RequestCreate form)
+        public int Post(RequestPostCreateSchool form)
         {
             var school = _schoolService.Create(form.name);
             if (school.Result != null)
@@ -43,9 +43,23 @@ namespace desafio_impulso_dotnet.Controllers
                 return StatusCodes.Status400BadRequest;
             }
         }
+        
+        [HttpGet("{id}")]
+        public IEnumerable<SchoolClass> GetShowSchoolClasses(string id)
+        {
+            var schoolClasses = _schoolService.GetAllSchoolClass(id);
+            return schoolClasses != null ? schoolClasses.ToArray() : null;
+        }
+        
+        [HttpPost("{id}")]
+        public IEnumerable<SchoolClass> PostShowSchoolClasses(string id)
+        {
+            var schoolClasses = _schoolService.GetAllSchoolClass(id);
+            return schoolClasses != null ? schoolClasses.ToArray() : null;
+        }
     }
 
-    public class RequestCreate
+    public class RequestPostCreateSchool
     {
         public string name { get; set; }
     }

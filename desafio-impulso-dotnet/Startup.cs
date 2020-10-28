@@ -35,6 +35,7 @@ namespace desafio_impulso_dotnet
             
             services.AddScoped<ISchoolService, SchoolService>();
             services.AddScoped<ISchoolRepository, SchoolRepository>();
+            services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
             
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory

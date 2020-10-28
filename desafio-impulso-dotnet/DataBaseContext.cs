@@ -19,6 +19,8 @@ namespace desafio_impulso_dotnet
             {
                 entity.Property(e => e.Name)
                     .IsRequired();
+                entity.HasMany(c => c.SchoolClasses)
+                    .WithOne(e => e.School);
             });
 
             modelBuilder.Entity<SchoolClass>(entity =>
@@ -28,6 +30,9 @@ namespace desafio_impulso_dotnet
 
                 entity.Property(e => e.Grade)
                     .IsRequired();
+                
+                entity.HasOne(c => c.School)
+                    .WithMany(e => e.SchoolClasses);
             });
 
             base.OnModelCreating(modelBuilder);

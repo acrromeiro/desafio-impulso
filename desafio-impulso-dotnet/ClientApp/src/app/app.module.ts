@@ -10,6 +10,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CreateSchoolComponent } from './create-school/create-school.component';
 import { ListSchoolComponent } from './list-school/list-school.component';
+import { ShowSchoolComponent } from './show-school/show-school.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ListSchoolComponent } from './list-school/list-school.component';
     NavMenuComponent,
     HomeComponent,
     CreateSchoolComponent,
-    ListSchoolComponent
+    ListSchoolComponent,
+    ShowSchoolComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -28,6 +30,7 @@ import { ListSchoolComponent } from './list-school/list-school.component';
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'create-school', component: CreateSchoolComponent },
       { path: 'list-school', component: ListSchoolComponent },
+      { path: 'show-school', component: ShowSchoolComponent },
     ])
   ],
   providers: [],

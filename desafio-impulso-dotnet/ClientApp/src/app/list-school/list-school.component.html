@@ -5,13 +5,15 @@
 <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="schools">
   <thead>
     <tr>
+      <th>Id</th>
       <th>Nome</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let school of schools">
-      <td>{{ school.name }}</td>
-    </tr>
+      <tr *ngFor="let school of schools" [routerLink]="['/show-school']">
+        <td>{{ school.id }}</td>
+        <td>{{ school.name }}</td>
+      </tr>
   </tbody>
 </table>
 
