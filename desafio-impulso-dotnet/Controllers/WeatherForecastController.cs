@@ -31,7 +31,7 @@ namespace desafio_impulso_dotnet.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            var school = _schoolService.create("IGD");
+            var school = _schoolService.Create("IGD");
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
                 {

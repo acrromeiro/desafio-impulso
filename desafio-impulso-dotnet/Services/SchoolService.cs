@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading.Tasks;
 using desafio_impulso_dotnet.Models;
 using desafio_impulso_dotnet.Repositories;
@@ -15,11 +16,16 @@ namespace desafio_impulso_dotnet.Services
             _schoolRepository = schoolRepository;
         }
 
-        public async Task<School> create(string Name)
+        public async Task<School> Create(string Name)
         {
             School school = new School();
             school.Name = Name;
             return await this._schoolRepository.AddAsync(school);
+        }
+        
+        public IQueryable<School> GetAll()
+        {
+            return  this._schoolRepository.GetAll();
         }
     }
 }
