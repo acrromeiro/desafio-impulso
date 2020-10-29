@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
 export class ListSchoolComponent {
   public schools: School[];
 
-  constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(http: HttpClient, @Inject('API_BASE_URL') baseUrl: string) {
+    console.log(baseUrl)
     http.get<School[]>(baseUrl + 'school').subscribe(result => {
       this.schools = result;
     }, error => console.error(error));

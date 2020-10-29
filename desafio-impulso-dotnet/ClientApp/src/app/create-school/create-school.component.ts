@@ -11,7 +11,7 @@ export class CreateSchoolComponent {
   @Input()
   public name: string;
 
-  constructor(private notifier:NotifierService,private router: Router, private http: HttpClient, @Inject('BASE_URL')private baseUrl: string) {}
+  constructor(private notifier:NotifierService,private router: Router, private http: HttpClient, @Inject('API_BASE_URL')private baseUrl: string) {}
 
   public save() {
     this.http.post(this.baseUrl + 'school',{"name":this.name}).subscribe(result => {

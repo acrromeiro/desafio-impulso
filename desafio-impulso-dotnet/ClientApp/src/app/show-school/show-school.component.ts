@@ -10,7 +10,7 @@ export class ShowSchoolComponent {
   public schoolClasses: SchoolClass[];
   public schoolId: string;
 
-  constructor(private route: ActivatedRoute,http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+  constructor(private route: ActivatedRoute,http: HttpClient, @Inject('API_BASE_URL') baseUrl: string) {
     this.schoolId = this.route.snapshot.paramMap.get('id');
 
     http.get<SchoolClass[]>(baseUrl + 'school/' + this.schoolId ).subscribe(result => {

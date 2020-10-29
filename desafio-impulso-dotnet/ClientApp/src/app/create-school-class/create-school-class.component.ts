@@ -16,7 +16,7 @@ export class CreateSchoolClassComponent {
   public qtdStudents: string;
   public schoolId: string;
 
-  constructor(private notifier:NotifierService,private route: ActivatedRoute,private router: Router, private http: HttpClient, @Inject('BASE_URL')private baseUrl: string) {
+  constructor(private notifier:NotifierService,private route: ActivatedRoute,private router: Router, private http: HttpClient, @Inject('API_BASE_URL')private baseUrl: string) {
     this.schoolId = this.route.snapshot.paramMap.get('id');
   }
 
