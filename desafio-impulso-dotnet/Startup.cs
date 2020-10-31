@@ -4,7 +4,6 @@ using desafio_impulso_dotnet.Repositories;
 using desafio_impulso_dotnet.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -15,6 +14,8 @@ namespace desafio_impulso_dotnet
 {
     public class Startup
     {
+        public String enviromentConfig;
+        
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -26,6 +27,13 @@ namespace desafio_impulso_dotnet
         public void ConfigureServices(IServiceCollection services)
         {
             var connection = Configuration["ConnectionStrings:DefaultConnection"];
+            enviromentConfig = Configuration["env"];
+            if (connection == null && enviromentConfig == null)
+            {
+                connection = "Data Source=test.db";
+                enviromentConfig = "Tests";
+            }
+
             services.AddDbContext<DataBaseContext>(options =>
                 options.UseSqlite(connection, options =>
                 {
@@ -36,11 +44,17 @@ namespace desafio_impulso_dotnet
             services.AddScoped<ISchoolService, SchoolService>();
             services.AddScoped<ISchoolRepository, SchoolRepository>();
             services.AddScoped<ISchoolClassRepository, SchoolClassRepository>();
-            
-            services.AddControllersWithViews();
-            // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
 
+            if (enviromentConfig != "Tests")
+            {
+                services.AddControllersWithViews();
+                // In production, the Angular files will be served from this directory
+                services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/dist"; });
+            }
+            else
+            {
+                services.AddControllers();
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -64,7 +78,7 @@ namespace desafio_impulso_dotnet
             }
 
             app.UseStaticFiles();
-            if (!env.IsDevelopment())
+            if (!env.IsDevelopment() && enviromentConfig != "Tests")
             {
                 app.UseSpaStaticFiles();
             }
@@ -86,16 +100,19 @@ namespace desafio_impulso_dotnet
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
+            if (enviromentConfig != "Tests")
             {
-                // To learn more about options for serving an Angular SPA from ASP.NET Core,
-                // see https://go.microsoft.com/fwlink/?linkid=864501
+                app.UseSpa(spa =>
+                {
+                    // To learn more about options for serving an Angular SPA from ASP.NET Core,
+                    // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp";
+                    spa.Options.SourcePath = "ClientApp";
 
-              
-                spa.UseAngularCliServer(npmScript: "start");
-            });
+
+                    spa.UseAngularCliServer(npmScript: "start");
+                });
+            }
         }
     }
 }

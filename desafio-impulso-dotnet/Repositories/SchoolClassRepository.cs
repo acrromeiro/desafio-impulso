@@ -14,7 +14,7 @@ namespace desafio_impulso_dotnet.Repositories
         {
             try
             {
-                return this.GetAll().Where(c=>c.SchoolId == schoolId);
+                return GetAll().Where(c=>c.SchoolId == schoolId);
             }
             catch (Exception ex)
             {

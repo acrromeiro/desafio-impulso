@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using desafio_impulso_dotnet.Models;
 using desafio_impulso_dotnet.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json.Linq;
 
 namespace desafio_impulso_dotnet.Controllers
 {
@@ -38,10 +35,8 @@ namespace desafio_impulso_dotnet.Controllers
             {
                 return StatusCodes.Status201Created;
             }
-            else
-            {
-                return StatusCodes.Status400BadRequest;
-            }
+            
+            return StatusCodes.Status400BadRequest;
         }
         
         [HttpGet("{id}")]
@@ -61,10 +56,8 @@ namespace desafio_impulso_dotnet.Controllers
             {
                 return StatusCodes.Status201Created;
             }
-            else
-            {
-                return StatusCodes.Status400BadRequest;
-            }
+
+            return StatusCodes.Status400BadRequest;
         }
     }
 
