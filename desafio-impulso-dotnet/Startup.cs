@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using System.Xml;
 using desafio_impulso_dotnet.Repositories;
 using desafio_impulso_dotnet.Services;
 using Microsoft.AspNetCore.Builder;
@@ -30,7 +31,7 @@ namespace desafio_impulso_dotnet
             enviromentConfig = Configuration["env"];
             if (connection == null && enviromentConfig == null)
             {
-                connection = "Data Source=test.db";
+                connection = "Data Source=test"+ (new UniqueId().ToString())+".db";
                 enviromentConfig = "Tests";
             }
 

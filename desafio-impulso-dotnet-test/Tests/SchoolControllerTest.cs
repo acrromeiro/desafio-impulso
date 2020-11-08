@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using desafio_impulso_dotnet;
 using Microsoft.AspNetCore.Hosting;
@@ -107,8 +108,7 @@ namespace desafio_impulso_dotnet_test.Tests
             
             var jsonInStringSchool = "{\"name\":\"Escola1\"}";
             var response = await _client.PostAsync("/school",new StringContent(jsonInStringSchool, Encoding.UTF8, "application/json"));
-            response.EnsureSuccessStatusCode();
-            
+           
             response = await _client.GetAsync("/school/1");
             response.EnsureSuccessStatusCode();
             var responseString = await response.Content.ReadAsStringAsync();

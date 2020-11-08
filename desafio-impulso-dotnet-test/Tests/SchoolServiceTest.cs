@@ -1,6 +1,7 @@
 using System;
 using System.Net.Http;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using desafio_impulso_dotnet;
 using desafio_impulso_dotnet.Repositories;
@@ -29,6 +30,7 @@ namespace desafio_impulso_dotnet_test.Tests
             _dataBaseContext = (DataBaseContext) _server.Services.GetService(t);
             
             _schoolService = new SchoolService(new SchoolRepository(_dataBaseContext), new SchoolClassRepository(_dataBaseContext));
+            
         }
 
         public void SetDown()
@@ -44,7 +46,7 @@ namespace desafio_impulso_dotnet_test.Tests
         public async Task CreateSchool()
         {
             SetUp();
-
+            
             var school = _schoolService.Create("Escola1");
             
             Assert.Equal("Escola1", school.Result.Name);
@@ -57,7 +59,7 @@ namespace desafio_impulso_dotnet_test.Tests
         public async Task CreateSchoolClass()
         {
             SetUp();
-
+            
             var school = _schoolService.Create("Escola1");
             
             Assert.Equal("Escola1", school.Result.Name);
