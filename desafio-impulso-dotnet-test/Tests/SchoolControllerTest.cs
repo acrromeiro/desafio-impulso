@@ -90,7 +90,6 @@ namespace desafio_impulso_dotnet_test.Tests
             
             var jsonInStringSchoolClass = "{\"name\":\"Turam 63\",\"grade\":\"6\",\"qtdStudents\":\"63\",\"schoolId\":\"1\"}";
             response = await _client.PostAsync("/school/1",new StringContent(jsonInStringSchoolClass, Encoding.UTF8, "application/json"));
-            response.EnsureSuccessStatusCode();
             
             response = await _client.GetAsync("/school/1");
             response.EnsureSuccessStatusCode();
