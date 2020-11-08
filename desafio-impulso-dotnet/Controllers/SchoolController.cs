@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using desafio_impulso_dotnet.Models;
 using desafio_impulso_dotnet.Services;
@@ -42,8 +43,8 @@ namespace desafio_impulso_dotnet.Controllers
         [HttpGet("{id}")]
         public IEnumerable<SchoolClass> GetShowSchoolClasses(string id)
         {
-            var schoolClasses = _schoolService.GetAllSchoolClass(id);
-            return schoolClasses != null ? schoolClasses.ToArray() : null;
+            var schoolClasses = _schoolService.GetAllSchoolClass(Int32.Parse(id));
+            return schoolClasses?.ToArray();
         }
         
         [HttpPost("{id}")]
@@ -51,7 +52,7 @@ namespace desafio_impulso_dotnet.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public int PostShowSchoolClasses(RequestPostCreateSchoolClass form)
         {
-            var school = _schoolService.CreateSchoolClassInSchool(form.name,form.grade,form.qtdStudents,form.schoolId);
+            var school = _schoolService.CreateSchoolClassInSchool(form.name,form.grade,Int32.Parse(form.qtdStudents),Int32.Parse(form.schoolId));
             if (school.Result != null)
             {
                 return StatusCodes.Status201Created;

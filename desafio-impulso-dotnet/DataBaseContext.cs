@@ -5,6 +5,7 @@ namespace desafio_impulso_dotnet
 {
     public class DataBaseContext : DbContext
     {
+        public DataBaseContext(){}
         public DataBaseContext(DbContextOptions<DataBaseContext> options)
             : base(options)
         {

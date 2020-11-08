@@ -1,7 +1,22 @@
 <h1>Cadastrar Turma</h1>
 
-<p aria-live="polite">Nome:  <input type="text" [(ngModel)]='name' /> </p>
-<p aria-live="polite">Série:  <input type="text" [(ngModel)]='grade' /> </p>
-<p aria-live="polite">Quantidade de Alunos:  <input type="text" [(ngModel)]='qtdStudents' /> </p>
+<div class="col-md-4 mb-3">
+  <label>Nome</label>
+  <div class="input-group">
+    <input type="text" [(ngModel)]='name' class="form-control" placeholder="Coloque o nome da turma" required>
+  </div>
+</div>
+<div class="col-md-4 mb-3">
+  <label>Série</label>
+  <div class="input-group">
+    <input type="text" [(ngModel)]='grade' class="form-control" placeholder="Coloque a série da turma" required>
+  </div>
+</div>
+<div class="col-md-4 mb-3">
+  <label>Quantidade de Alunos</label>
+  <div class="input-group">
+    <input type="text" [(ngModel)]='qtdStudents' class="form-control" placeholder="Coloque a quantidade de alunos da turma" required>
+  </div>
+</div>
 
 <button class="btn btn-success" (click)="save()">Salvar</button>

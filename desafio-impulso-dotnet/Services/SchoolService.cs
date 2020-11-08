@@ -29,18 +29,18 @@ namespace desafio_impulso_dotnet.Services
             return  _schoolRepository.GetAll();
         }
         
-        public IQueryable<SchoolClass> GetAllSchoolClass(string id)
+        public IQueryable<SchoolClass> GetAllSchoolClass(int id)
         {
-           return _schoolClassRepository.GetAllBySchoolId(Int32.Parse(id));
+           return _schoolClassRepository.GetAllBySchoolId(id);
         }
         
-        public async Task<SchoolClass> CreateSchoolClassInSchool(string Name,string Grade,string QtdStudents,string SchoolId)
+        public async Task<SchoolClass> CreateSchoolClassInSchool(string Name,string Grade,int QtdStudents,int SchoolId)
         {
             SchoolClass schoolClass = new SchoolClass();
             schoolClass.Name = Name;
             schoolClass.Grade = Grade;
-            schoolClass.QtdStudents = Int32.Parse(QtdStudents);
-            schoolClass.SchoolId = Int32.Parse(SchoolId);
+            schoolClass.QtdStudents = QtdStudents;
+            schoolClass.SchoolId = SchoolId;
             return await _schoolClassRepository.AddAsync(schoolClass);
         }
     }

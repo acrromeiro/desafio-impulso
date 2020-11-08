@@ -10,8 +10,8 @@ namespace desafio_impulso_dotnet.Services
         
         IQueryable<School> GetAll();
 
-        IQueryable<SchoolClass> GetAllSchoolClass(string id);
+        IQueryable<SchoolClass> GetAllSchoolClass(int id);
 
-        Task<SchoolClass> CreateSchoolClassInSchool(string Name, string Grade, string QtdStudents, string SchoolId);
+        Task<SchoolClass> CreateSchoolClassInSchool(string Name, string Grade, int QtdStudents, int SchoolId);
     }
 }
